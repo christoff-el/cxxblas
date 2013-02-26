@@ -1,4 +1,4 @@
 CXXBLAS
 =======
 
-This is our new C++ BLAS project.
+This is our new C++ BLAS project.  Its under BSD license.
