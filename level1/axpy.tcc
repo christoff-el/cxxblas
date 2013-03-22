@@ -11,5 +11,4 @@ axpy(IndexType n, const ALPHA &alpha, const X *x, IndexType incX,
     }
 }
 
-
 #endif // CXXBLAS_LEVEL1_AXPY_TCC 1

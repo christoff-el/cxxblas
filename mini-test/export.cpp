@@ -60,13 +60,13 @@ void
     dot(*N,X,*INCX,Y,*INCY,*RES);
 }
 
-//nrm2	<-- NOT IMPLEMENTED
+//nrm2
 void
 (snrm2_)(int 			*N,
          const float	*X,
          int 			*INCX)
 {
-    //nrm2(*N,X,*INCX);
+    nrm2(*N,X,*INCX);
 }
 
 //rot

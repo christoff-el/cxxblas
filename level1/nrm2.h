@@ -5,4 +5,4 @@ template <typename IndexType, typename X, typename Num>
 	void
 	nrm2(IndexType n, const X x, IndexType incX, Num &value);
 
-#endif //CXXBLAS_LEVEL_1_NRM2_H 1
+#endif	// CXXBLAS_LEVEL_1_NRM2_H 1
