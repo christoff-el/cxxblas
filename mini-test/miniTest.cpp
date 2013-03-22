@@ -10,6 +10,9 @@
 #include "../level1/swap.tcc"
 #include "../level1/rot.tcc"
 
+#include "../level1/iamax.tcc"
+#include "../level1/iamin.tcc"
+
 
 using namespace std;
 
@@ -66,6 +69,22 @@ int main() {
 		cout << B[i] << " ";
 	}
 	cout << endl;					// <--- 0 17 34 51 68  --  0 -6 -12 -18 -24
+	
+	//iamax
+	A[2] = 100;
+	B[0] = -100;
+	int Amax;
+	int Bmax;
+	iamax(5,A,1,Amax);
+	iamax(5,B,1,Bmax);
+	cout << Amax << " " << Bmax << endl; 	// <--- 2 0
+	
+	//iamin
+	int Amin;
+	int Bmin;
+	iamin(5,A,1,Amin);
+	iamin(5,B,1,Bmin);
+	cout << Amin << " " << Bmin << endl;	// <--- 0 1
 	
 	
 	
