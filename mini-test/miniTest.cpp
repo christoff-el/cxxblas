@@ -14,6 +14,7 @@
 #include "../level1/iamin.tcc"
 
 #include "../level1/rotm.tcc"
+#include "../level1/rotg.tcc"
 
 
 using namespace std;
@@ -79,7 +80,11 @@ int main() {
 	cout << Amin << " " << Bmin << endl;	// <--- 0 1
 	
 	//rotm//
-	double param1[5], param2[5], param3[5], param4[5];
+	double *param1 = new double[5];
+	double *param2 = new double[5];
+	double *param3 = new double[5];
+	double *param4 = new double[5];
+	
 	param1[0] = -1.;		param1[1] = 2.;		param1[2] = 3.;		param1[3] = 4.;		param1[4] = 5.;
 	param2[0] = 0.;			param2[1] = 2.;		param2[2] = 3.;		param2[3] = 4.;		param2[4] = 5.;
 	param3[0] = 1.;			param3[1] = 2.;		param3[2] = 3.;		param3[3] = 4.;		param3[4] = 5.;
@@ -137,6 +142,21 @@ int main() {
 	for(int i=0; i<5; i++) {cout << B[i] << " ";}
 	cout << endl;					// <--- 0 1 2 3 4  --  2 3 4 5 6
 	
+	//rotg//
+	double a = 3;
+	double b = 4;
+	double c,s;
+	rotg(a,b,c,s);
+	
+	cout << a << " " << b << " " << c << " " << s << endl;
 
+
+
+	delete[] A;
+	delete[] B;
+	delete[] param1;
+	delete[] param2;
+	delete[] param3;
+	delete[] param4;
 	return 0;
 }

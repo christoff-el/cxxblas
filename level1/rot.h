@@ -3,6 +3,6 @@
 
 template <typename IndexType, typename X, typename Y, typename ParamType>
 	void
-	rot(IndexType n, X *x, IndexType incX, Y *y, IndexType incY, ParamType c, ParamType s);
+	rot(IndexType n, X *x, IndexType incX, Y *y, IndexType incY, const ParamType c, const ParamType s);
 
 #endif	// CXXBLAS_LEVEL1_ROT_H 1
