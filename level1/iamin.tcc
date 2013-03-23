@@ -20,4 +20,4 @@ iamin(IndexType n, X *x, IndexType incX, IndexType &iMin)
 	
 }
 
-#endif	// CXXBLAS_LEVEL1_IAMin_TCC 1
+#endif	// CXXBLAS_LEVEL1_IAMIN_TCC 1
