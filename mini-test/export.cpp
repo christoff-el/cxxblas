@@ -4,12 +4,12 @@
 #include "../level1/axpy.tcc"
 #include "../level1/copy.tcc"
 #include "../level1/dot.tcc"
-//#include "../level1/nrm2.tcc"		<-- NA
+#include "../level1/nrm2.tcc"		
 #include "../level1/rot.tcc"
 //#include "../level1/rotg.tcc"		<-- NA
 #include "../level1/scal.tcc"
 #include "../level1/swap.tcc"
-//#include "../level1/i_amax.tcc"	<-- NA
+#include "../level1/iamax.tcc"
 
 
 
@@ -64,9 +64,10 @@ void
 void
 (snrm2_)(int 			*N,
          const float	*X,
-         int 			*INCX)
+         int 			*INCX
+         float			*RES)
 {
-    nrm2(*N,X,*INCX);
+    nrm2(*N,X,*INCX, *RES);
 }
 
 //rot
@@ -113,13 +114,13 @@ void
     swap(*N,X,*INCX,Y,*INCY);
 }
 
-//i_amax	<-- NOT IMPLEMENTED
+//i_amax
 void
 (isamax_)(int 			*N,
           float			*X,
     	  int 			*INCX)
 {
-    //i_amax(*N,X,*INCX);
+    iamax(*N,X,*INCX);
 }
 
 }
