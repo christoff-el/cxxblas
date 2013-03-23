@@ -64,7 +64,7 @@ void
 void
 (snrm2_)(int 			*N,
          const float	*X,
-         int 			*INCX
+         int 			*INCX,
          float			*RES)
 {
     nrm2(*N,X,*INCX, *RES);
@@ -118,9 +118,10 @@ void
 void
 (isamax_)(int 			*N,
           float			*X,
-    	  int 			*INCX)
+    	  int 			*INCX,
+    	  int			*IRES)
 {
-    iamax(*N,X,*INCX);
+    iamax(*N,X,*INCX,*IRES);
 }
 
 }
