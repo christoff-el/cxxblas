@@ -1,36 +1,45 @@
 #ifndef CXXBLAS_LEVEL1_ROTM_TCC
 #define CXXBLAS_LEVEL1_ROTM_TCC 1
 
-template <typename IndexType, typename X, typename Y, typename PARAMTYPE>
+template <typename IndexType, typename X, typename Y, typename ParamType>
 void
-rotm(IndexType n, X *x, IndexType incX, Y *y, IndexType incY, PARAMTYPE &param)
+rotm(IndexType n, X *x, IndexType incX, Y *y, IndexType incY, const ParamType *param)
 {
+	
+	ParamType h11, h12, h21, h22;
 	
 	switch ((int)param[0]) {
 		case 0:
-			param[1] = 1.;
-			param[4] = 1.;
+			h11 = 1.;
+			h21 = param[2];
+			h12 = param[3];
+			h22 = 1.;
 			break;
 		case 1:
-			param[2] = -1.;
-			param[3] = 1.;
+			h11 = param[1];
+			h21 = -1.;
+			h12 = 1.;
+			h22 = param[4];
 			break;
 		case -2:
-			param[1] = 1.;
-			param[2] = 0.;
-			param[3] = 0.;
-			param[4] = 1.;
+			h11 = 1.;
+			h21 = 0.;
+			h12 = 0.;
+			h22 = 1.;
 			break;
 		default:
-			//assumes param[0] = -1. --> uses supplied param values.
+			h11 = param[1];
+			h21 = param[2];
+			h12 = param[3];
+			h22 = param[4];
 			break;
 	}
 	
 	X tmpX;
 	for (IndexType i=0, iX=0, iY=0; i<n; ++i, iX+=incX, iY+=incY) {
 		tmpX = x[iX];
-		x[iX] = param[1]*tmpX + param[3]*y[iY];
-		y[iY] = param[2]*tmpX + param[4]*y[iY];
+		x[iX] = h11*tmpX + h12*y[iY];
+		y[iY] = h21*tmpX + h22*y[iY];
 	}
 	
 }
