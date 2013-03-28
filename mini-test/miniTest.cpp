@@ -54,6 +54,12 @@ int main() {
 	for(int i=0; i<5; i++) {cout << B[i] << " ";}
 	cout << endl;					// <--- 0 3 6 9 12  --  0 2 4 6 8
 	
+	//dot//
+	double dotOutF = dot<double>(5,A,1,B,1);
+	double dotOutB = dot<double>(5,A,-1,B,1);
+	cout << dotOutF << endl;		// <--- 180
+	cout << dotOutB << endl;		// <--- 60
+	
 	//rot//
 	rot(5,A,1,B,1,3.,4.);
 	

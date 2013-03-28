@@ -49,15 +49,14 @@ void
 }
 
 //dot
-void
+float
 (sdot_)(int 			*N,
         const float		*X,
         int 			*INCX,
-        float			*Y,
-        int				*INCY,
-        float			*RES)
+        const float		*Y,
+        int				*INCY)
 {
-    dot(*N,X,*INCX,Y,*INCY,*RES);
+    return dot<float>(*N,X,*INCX,Y,*INCY);
 }
 
 //nrm2

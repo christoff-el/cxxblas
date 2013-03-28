@@ -32,25 +32,33 @@
          INCX = 9999
          INCY = 9999
          MODE = 9999
-         IF (ICASE.EQ.3) THEN
+         IF (ICASE.EQ.3) THEN !										If it's SROTG
             CALL CHECK0(SFAC)
-         ELSE IF (ICASE.EQ.7 .OR. ICASE.EQ.8 .OR. ICASE.EQ.9 .OR.
+         ELSE IF (ICASE.EQ.7 .OR. ICASE.EQ.8 .OR. ICASE.EQ.9 .OR. !	If it's SNRM2,SASUM,SSCAL,ISAMAX
      +            ICASE.EQ.10) THEN
             CALL CHECK1(SFAC)
-         ELSE IF (ICASE.EQ.1 .OR. ICASE.EQ.2 .OR. ICASE.EQ.5 .OR.
+         ELSE IF (ICASE.EQ.1 .OR. ICASE.EQ.2 .OR. ICASE.EQ.5 .OR. !	If it's SDOT,SAXPY,SCOPY,SSWAP
      +            ICASE.EQ.6) THEN
             CALL CHECK2(SFAC)
-         ELSE IF (ICASE.EQ.4) THEN
+         ELSE IF (ICASE.EQ.4) THEN !								If it's SROT
             CALL CHECK3(SFAC)
          END IF
+*
 *        -- Print
-         IF (PASS) WRITE (NOUT,99998)
+         IF (PASS) WRITE (NOUT,99998)!		If it passes, it writes PASS
    20 CONTINUE
       STOP
 *
+*	  .. These format things are referenced in WRITE commands by their id number (e.g. 99999)
 99999 FORMAT (' Real BLAS Test Program Results',/1X)
 99998 FORMAT ('                                    ----- PASS -----')
       END
+*	  .. ---------------------END PROGRAM SBLAT---------------------..
+*
+*	  .. SUBROUTINES:
+*
+*	  .. ---------------------HEADER--------------------------------..
+*	  .. This literally just prints the test number/function tested
       SUBROUTINE HEADER
 *     .. Parameters ..
       INTEGER          NOUT
@@ -74,11 +82,13 @@
       DATA             L(9)/'SSCAL '/
       DATA             L(10)/'ISAMAX'/
 *     .. Executable Statements ..
-      WRITE (NOUT,99999) ICASE, L(ICASE)
+      WRITE (NOUT,99999) ICASE, L(ICASE) !		Writes e.g. Test of subprogram number 1	SDOT
       RETURN
 *
 99999 FORMAT (/' Test of subprogram number',I3,12X,A6)
       END
+*	  .. --------------------END HEADER --------------------------..
+*
       SUBROUTINE CHECK0(SFAC)
 *     .. Parameters ..
       INTEGER           NOUT
@@ -126,7 +136,7 @@
          N = K
          IF (ICASE.EQ.3) THEN
 *           .. SROTG ..
-            IF (K.GT.8) GO TO 40
+            IF (K.GT.8) GO TO 40 !			Leave + return to if statement of program
             SA = DA1(K)
             SB = DB1(K)
             CALL SROTG(SA,SB,SC,SS)
@@ -245,7 +255,7 @@
       INTEGER           ICASE, INCX, INCY, MODE, N
       LOGICAL           PASS
 *     .. Local Scalars ..
-      REAL              SA, SC, SS
+      REAL              SA, SC, SS, TMP
       INTEGER           I, J, KI, KN, KSIZE, LENX, LENY, MX, MY
 *     .. Local Arrays ..
       REAL              DT10X(7,4,4), DT10Y(7,4,4), DT7(4,4),
@@ -377,25 +387,29 @@
      +                  1.17E0, 1.17E0, 1.17E0/
 *     .. Executable Statements ..
 *
-      DO 120 KI = 1, 4
-         INCX = INCXS(KI)
-         INCY = INCYS(KI)
+      DO 120 KI = 1, 4 !				Loop over increment types
+         INCX = INCXS(KI) !				INCXS = [1 2 -2 -1]
+         INCY = INCYS(KI) !				INCYS = [1 -2 1 -2]
          MX = ABS(INCX)
          MY = ABS(INCY)
 *
-         DO 100 KN = 1, 4
-            N = NS(KN)
+         DO 100 KN = 1, 4 !				Loop over vector lengths
+            N = NS(KN) !				NS = [0 1 2 4]
             KSIZE = MIN(2,KN)
             LENX = LENS(KN,MX)
             LENY = LENS(KN,MY)
 *           .. Initialize all argument arrays ..
-            DO 20 I = 1, 7
-               SX(I) = DX1(I)
-               SY(I) = DY1(I)
+            DO 20 I = 1, 7 !		Copies data arrays to SX, SY	(recall some functions change SX,SY, so this is done every time)
+               SX(I) = DX1(I) !			DX1 = [0.6 0.1 -0.5 0.8 0.9 -0.3 -0.4]
+               SY(I) = DY1(I) !			DY1 = [0.5 -0.9 0.3 0.7 -0.6 0.2 0.8]
    20       CONTINUE
 *
             IF (ICASE.EQ.1) THEN
 *              .. SDOT ..
+               TMP = SDOT(N,SX,INCX,SY,INCY)
+               WRITE (NOUT,99997) KI, KN, SDOT(N,SX,INCX,SY,INCY), 
+     +                                 DT7(KN,KI)
+               !WRITE (NOUT,99998) KI, KN
                CALL STEST1(SDOT(N,SX,INCX,SY,INCY),DT7(KN,KI),SSIZE1(KN)
      +                     ,SFAC)
             ELSE IF (ICASE.EQ.2) THEN
@@ -428,6 +442,8 @@
   100    CONTINUE
   120 CONTINUE
       RETURN
+99998 FORMAT (I4,I4)
+99997 FORMAT (1X,2I4,2E12.4)
       END
       SUBROUTINE CHECK3(SFAC)
 *     .. Parameters ..
