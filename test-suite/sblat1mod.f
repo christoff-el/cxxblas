@@ -71,12 +71,12 @@
 *     .. Common blocks ..
       COMMON           /COMBLA/ICASE, N, INCX, INCY, MODE, PASS
 *     .. Data statements ..
-      DATA             L(1)/' SDOT '/
-      DATA             L(2)/'SAXPY '/
+      DATA             L(1)/' SDOT '/ !				¦
+      DATA             L(2)/'SAXPY '/ !				¦
       DATA             L(3)/'SROTG '/
       DATA             L(4)/' SROT '/
-      DATA             L(5)/'SCOPY '/
-      DATA             L(6)/'SSWAP '/
+      DATA             L(5)/'SCOPY '/ !				¦
+      DATA             L(6)/'SSWAP '/ !				¦
       DATA             L(7)/'SNRM2 '/
       DATA             L(8)/'SASUM '/
       DATA             L(9)/'SSCAL '/
@@ -136,13 +136,19 @@
          N = K
          IF (ICASE.EQ.3) THEN
 *           .. SROTG ..
-            IF (K.GT.8) GO TO 40 !			Leave + return to if statement of program
+            IF (K.GT.8) GO TO 40 !			Jump to RETURN labelled 40
             SA = DA1(K)
             SB = DB1(K)
+            WRITE (NOUT,99998) SA, SB
             CALL SROTG(SA,SB,SC,SS)
+*            WRITE (NOUT,99999) SA, SB, SC, SS
+            WRITE (NOUT,*) '       SA:'
             CALL STEST1(SA,DATRUE(K),DATRUE(K),SFAC)
+            WRITE (NOUT,*) '       SB:'
             CALL STEST1(SB,DBTRUE(K),DBTRUE(K),SFAC)
+            WRITE (NOUT,*) '       SC:'
             CALL STEST1(SC,DC1(K),DC1(K),SFAC)
+            WRITE (NOUT,*) '       SD:'
             CALL STEST1(SS,DS1(K),DS1(K),SFAC)
          ELSE
             WRITE (NOUT,*) ' Shouldn''t be here in CHECK0'
@@ -150,6 +156,8 @@
          END IF
    20 CONTINUE
    40 RETURN
+99999 FORMAT (4E12.4)
+99998 FORMAT (2E12.4)
       END
       SUBROUTINE CHECK1(SFAC)
 *     .. Parameters ..
@@ -236,6 +244,8 @@
                CALL STEST(LEN,SX,STRUE,STRUE,SFAC)
             ELSE IF (ICASE.EQ.10) THEN
 *              .. ISAMAX ..
+*               !WRITE (NOUT,99999) SX(1), SX(2), SX(3), SX(4), 
+*     !+                               SX(5), SX(6), SX(7), SX(8)
                CALL ITEST1(ISAMAX(N,SX,INCX),ITRUE2(NP1))
             ELSE
                WRITE (NOUT,*) ' Shouldn''t be here in CHECK1'
@@ -244,6 +254,8 @@
    60    CONTINUE
    80 CONTINUE
       RETURN
+*
+!99999 FORMAT (8E12.4)
       END
       SUBROUTINE CHECK2(SFAC)
 *     .. Parameters ..

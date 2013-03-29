@@ -4,9 +4,9 @@
 #include "../level1/axpy.tcc"
 #include "../level1/copy.tcc"
 #include "../level1/dot.tcc"
-#include "../level1/nrm2.tcc"		
+#include "../level1/nrm2.tcc"
 #include "../level1/rot.tcc"
-//#include "../level1/rotg.tcc"		<-- NA
+#include "../level1/rotg.tcc"
 #include "../level1/scal.tcc"
 #include "../level1/swap.tcc"
 #include "../level1/iamax.tcc"
@@ -16,13 +16,12 @@
 extern "C" {
 
 //asum
-void
+float
 (sasum_)(int 			*N,
 		 const float 	*X,
-         int			*INCX,
-         float 			*RES)
+         int			*INCX)
 {
-    asum(*N,X,*INCX, *RES);
+    return asum<float>(*N,X,*INCX);
 }
 
 //axpy
@@ -60,13 +59,12 @@ float
 }
 
 //nrm2
-void
+float
 (snrm2_)(int 			*N,
          const float	*X,
-         int 			*INCX,
-         float			*RES)
+         int 			*INCX)
 {
-    nrm2(*N,X,*INCX, *RES);
+    return nrm2<float>(*N,X,*INCX);
 }
 
 //rot
@@ -82,14 +80,14 @@ void
     rot(*N,X,*INCX,Y,*INCY,*C,*S);
 }
 
-//rotg	<-- NOT IMPLEMENTED
+//rotg
 void
 (srotg_)(float *A,
 		 float *B,
 		 float *C,
 		 float *S)
 {
-    //rotg(*A,*B,*C,*S);
+    rotg(*A,*B,*C,*S);
 }
 
 //scal
@@ -114,13 +112,12 @@ void
 }
 
 //i_amax
-void
+int
 (isamax_)(int 			*N,
           float			*X,
-    	  int 			*INCX,
-    	  int			*IRES)
+    	  int 			*INCX)
 {
-    iamax(*N,X,*INCX,*IRES);
+    return iamax(*N,X,*INCX);
 }
 
 }

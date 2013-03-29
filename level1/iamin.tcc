@@ -4,20 +4,21 @@
 #include <cmath>
 
 template <typename IndexType, typename X>
-void
-iamin(IndexType n, X *x, IndexType incX, IndexType &iMin)
+IndexType
+iamin(IndexType n, X *x, IndexType incX)
 {
 	using std::abs;
 	
-	iMin = 0;
-	X currMin = abs(x[0]);
-	for (IndexType i=1, iX=incX; i<n; ++i, iX+=incX) {
-		if (abs(x[iX]) < currMin) {
-			iMin = i;
+	IndexType iMin = 0;
+	X currMin = -1;
+	for (IndexType i=0, iX=0; i<n; ++i, iX+=incX) {
+		if (abs(x[iX]) > currMin) {
+			iMin = i+1;								//Convert c++ index to Fortran index
 			currMin = abs(x[iX]);
 		}
 	}
 	
+	return iMin;
 }
 
 #endif	// CXXBLAS_LEVEL1_IAMIN_TCC 1

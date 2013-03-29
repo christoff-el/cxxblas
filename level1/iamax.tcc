@@ -4,20 +4,21 @@
 #include <cmath>
 
 template <typename IndexType, typename X>
-void
-iamax(IndexType n, X *x, IndexType incX, IndexType &iMax)
+IndexType
+iamax(IndexType n, X *x, IndexType incX)
 {
 	using std::abs;
 	
-	iMax = 0;
-	X currMax = abs(x[0]);
-	for (IndexType i=1, iX=incX; i<n; ++i, iX+=incX) {
+	IndexType iMax = 0;
+	X currMax = -1;
+	for (IndexType i=0, iX=0; i<n; ++i, iX+=incX) {
 		if (abs(x[iX]) > currMax) {
-			iMax = i;
+			iMax = i+1;								//Convert c++ index to Fortran index
 			currMax = abs(x[iX]);
 		}
 	}
 	
+	return iMax;
 }
 
 #endif	// CXXBLAS_LEVEL1_IAMAX_TCC 1
