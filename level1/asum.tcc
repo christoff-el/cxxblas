@@ -2,15 +2,18 @@
 #define CXXBLAS_LEVEL1_ASUM_TCC 1
 #include <cmath>
 
-template <typename IndexType, typename X, typename NUM>
-void
-asum(IndexType n, const X *x, IndexType incX, NUM &sum)
+template <typename Num, typename IndexType, typename X>
+Num
+asum(IndexType n, const X *x, IndexType incX)
 {
 	using std::abs;
-	sum = 0;
-	for (IndexType i=0, ix=0; i<n; i++, ix += incX) {
-		sum += abs(x[ix]);
+	
+	Num sum = 0;
+	for (IndexType i=0, iX=0; i<n; ++i, iX+=incX) {
+		sum += abs(x[iX]);
 	}
+	
+	return sum;
 }
 
 #endif	// CXXBLAS_LEVEL1_ASUM_TCC 1
