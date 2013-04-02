@@ -235,4 +235,4 @@ int
     return iamax(*N,X,*INCX);
 }
 
-}
+}	//extern "C"
