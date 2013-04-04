@@ -1,6 +1,8 @@
 #ifndef CXXBLAS_LEVEL1_SWAP_TCC
 #define CXXBLAS_LEVEL1_SWAP_TCC 1
 
+#include <cmath>
+
 template <typename IndexType, typename X, typename Y>
 void
 swap(IndexType n, X *x, IndexType incX, Y *y, IndexType incY)

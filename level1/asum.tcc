@@ -1,5 +1,6 @@
 #ifndef CXXBLAS_LEVEL1_ASUM_TCC
 #define CXXBLAS_LEVEL1_ASUM_TCC 1
+
 #include <cmath>
 
 template <typename Num, typename IndexType, typename X>
