@@ -1,6 +1,8 @@
 #ifndef CXXBLAS_LEVEL1_AXPY_TCC
 #define CXXBLAS_LEVEL1_AXPY_TCC 1
 
+#include <cmath>
+
 template <typename IndexType, typename ALPHA, typename X, typename Y>
 void
 axpy(IndexType n, const ALPHA &alpha, const X *x, IndexType incX,

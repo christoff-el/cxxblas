@@ -1,6 +1,8 @@
 #ifndef CXXBLAS_LEVEL1_NRM2_TCC
 #define CXXBLAS_LEVEL1_NRM2_TCC 1
 
+#include <cmath>
+
 template <typename Num, typename IndexType, typename X>
 Num
 nrm2(IndexType n, const X x, IndexType incX)

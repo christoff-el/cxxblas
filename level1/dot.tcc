@@ -1,6 +1,8 @@
 #ifndef CXXBLAS_LEVEL1_DOT_TCC
 #define CXXBLAS_LEVEL1_DOT_TCC 1
 
+#include <cmath>
+
 template <typename Num, typename IndexType, typename X, typename Y>
 Num
 dot(IndexType n, const X *x, IndexType incX, const Y *y, IndexType incY)

@@ -1,6 +1,8 @@
 #ifndef CXXBLAS_LEVEL1_COPY_TCC
 #define CXXBLAS_LEVEL1_COPY_TCC 1
 
+#include <cmath>
+
 template <typename IndexType, typename X, typename Y>
 void
 copy(IndexType n, const X *x, IndexType incX, Y *y, IndexType incY)

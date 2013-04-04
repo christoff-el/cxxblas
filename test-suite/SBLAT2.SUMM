@@ -19,34 +19,7 @@
  ***** ILLEGAL VALUE OF PARAMETER NUMBER 11 NOT DETECTED BY SGEMV  *****
  ******* SGEMV  FAILED THE TESTS OF ERROR-EXITS *******
 
-      1: SGEMV ('N',  0,  0, 0.0, A,  1, X, 1, 0.0, Y, 1)         .
-      2: SGEMV ('N',  1,  0, 0.0, A,  2, X, 1, 0.0, Y, 1)         .
-      3: SGEMV ('N',  0,  1, 0.0, A,  1, X, 1, 0.0, Y, 1)         .
-      4: SGEMV ('N',  2,  1, 0.0, A,  3, X, 1, 0.0, Y, 1)         .
-      5: SGEMV ('N',  2,  1, 0.0, A,  3, X, 1, 1.0, Y, 1)         .
-      6: SGEMV ('N',  2,  1, 0.0, A,  3, X, 1, 0.9, Y, 1)         .
-      7: SGEMV ('N',  2,  1, 1.0, A,  3, X, 1, 0.0, Y, 1)         .
-      8: SGEMV ('N',  2,  1, 1.0, A,  3, X, 1, 1.0, Y, 1)         .
-      9: SGEMV ('N',  2,  1, 1.0, A,  3, X, 1, 0.9, Y, 1)         .
-     10: SGEMV ('N',  2,  1, 0.7, A,  3, X, 1, 0.0, Y, 1)         .
-     11: SGEMV ('N',  2,  1, 0.7, A,  3, X, 1, 1.0, Y, 1)         .
-     12: SGEMV ('N',  2,  1, 0.7, A,  3, X, 1, 0.9, Y, 1)         .
-     13: SGEMV ('N',  2,  1, 0.0, A,  3, X, 1, 0.0, Y, 2)         .
-     14: SGEMV ('N',  2,  1, 0.0, A,  3, X, 1, 1.0, Y, 2)         .
-     15: SGEMV ('N',  2,  1, 0.0, A,  3, X, 1, 0.9, Y, 2)         .
-     16: SGEMV ('N',  2,  1, 1.0, A,  3, X, 1, 0.0, Y, 2)         .
-     17: SGEMV ('N',  2,  1, 1.0, A,  3, X, 1, 1.0, Y, 2)         .
-     18: SGEMV ('N',  2,  1, 1.0, A,  3, X, 1, 0.9, Y, 2)         .
-     19: SGEMV ('N',  2,  1, 0.7, A,  3, X, 1, 0.0, Y, 2)         .
-     20: SGEMV ('N',  2,  1, 0.7, A,  3, X, 1, 1.0, Y, 2)         .
-     21: SGEMV ('N',  2,  1, 0.7, A,  3, X, 1, 0.9, Y, 2)         .
-     22: SGEMV ('N',  2,  1, 0.0, A,  3, X, 1, 0.0, Y,-1)         .
- ******* FATAL ERROR - COMPUTED RESULT IS LESS THAN HALF ACCURATE *******
-           EXPECTED RESULT   COMPUTED RESULT
-       1      -0.00000           0.00000    
-       2       0.00000         -0.262737    
- ******* SGEMV  FAILED ON CALL NUMBER:
-     22: SGEMV ('N',  2,  1, 0.0, A,  3, X, 1, 0.0, Y,-1)         .
+ SGEMV  PASSED THE COMPUTATIONAL TESTS (  3460 CALLS)
 
  SGBMV  WAS NOT TESTED
 

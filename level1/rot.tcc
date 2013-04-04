@@ -1,6 +1,8 @@
 #ifndef CXXBLAS_LEVEL1_ROT_TCC
 #define CXXBLAS_LEVEL1_ROT_TCC 1
 
+#include <cmath>
+
 template <typename IndexType, typename X, typename Y, typename ParamType>
 void
 rot(IndexType n, X *x, IndexType incX, Y *y, IndexType incY, const ParamType c, const ParamType s)

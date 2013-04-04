@@ -571,9 +571,9 @@
                               INCYS = INCY
 *
 *                             Call the subroutine.
-*
-         WRITE( NOUT, FMT = 9994 )NC, SNAME, TRANS, M, N, ALPHA, LDA,
-     $      INCX, BETA, INCY
+* Uncomment this to get called ops:
+*         WRITE( NOUT, FMT = 9994 )NC, SNAME, TRANS, M, N, ALPHA, LDA,
+*     $      INCX, BETA, INCY
                               IF( FULL )THEN
                                  IF( TRACE )
      $                              WRITE( NTRA, FMT = 9994 )NC, SNAME,
