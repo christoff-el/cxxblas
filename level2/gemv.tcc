@@ -13,8 +13,6 @@ gemv(char trans, IndexType m, IndexType n,
    			  Y *y, IndexType incY)
 { 
 	
-
-	
 	if (m<=0 || n<=0) {					//Nothing to do (required so that we don't accidentally change y when we shouldn't)
 		return;							//			e.g. m>0, n=0.		
 	}
@@ -63,7 +61,6 @@ gemv(char trans, IndexType m, IndexType n,
 		}
 	
 	}
-	
 	
 }
 
