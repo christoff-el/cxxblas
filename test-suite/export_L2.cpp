@@ -2,7 +2,7 @@
 
 //#include "../level2/gbmv.tcc"			<-- NA
 #include "../level2/gemv.tcc"
-//#include "../level2/ger.tcc"				<-- NA
+#include "../level2/ger.tcc"
 
 
 
@@ -62,7 +62,7 @@ void
 		float			*A,
 		int				*LDA)
 {
-	//ger(*M,*N,*ALPHA,X,*INCX,Y,*INCY,A,*LDA);
+	ger(*M,*N,*ALPHA,X,*INCX,Y,*INCY,A,*LDA);
 }
 
 //sbmv
