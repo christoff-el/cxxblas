@@ -13,7 +13,7 @@ spr(char uplo, IndexType n, const ScalType &alpha,
 		
 		for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX) {
 
-			for (IndexType j=0, jX=firstInxX; j<i+1; ++j, iA++, jX+=incX) {
+			for (IndexType j=0, jX=firstInxX; j<i+1; ++j, ++iA, jX+=incX) {
 				ap[iA] += alpha * x[iX] * x[jX];
 			}	
 		}
@@ -23,13 +23,12 @@ spr(char uplo, IndexType n, const ScalType &alpha,
 	
 		for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX) {
 
-			for (IndexType j=0, jX=firstInxX+i*incX; j<n-i; ++j, iA++, jX+=incX) {
+			for (IndexType j=0, jX=firstInxX+i*incX; j<n-i; ++j, ++iA, jX+=incX) {
 				ap[iA] += alpha * x[iX] * x[jX];
 			}	
 		}
 	
 	}
-
 
 }
 
