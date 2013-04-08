@@ -4,8 +4,8 @@
 #include "../level2/gemv.tcc"
 #include "../level2/ger.tcc"
 //#include "../level2/sbmv.tcc"			<-- NA
-//#include "../level2/spmv.tcc"			<-- NA
-//#include "../level2/spr2.tcc"			<-- NA
+#include "../level2/spmv.tcc"
+#include "../level2/spr2.tcc"
 #include "../level2/spr.tcc"
 //#include "../level2/symv.tcc"			<-- NA
 //#include "../level2/syr2.tcc"			<-- NA
@@ -106,7 +106,7 @@ void
 		 float			*Y,
 		 int			*INCY)
 {
-	//spmv(*UPLO,*N,*ALPHA,AP,X,*INCX,*BETA,Y,*INCY);
+	spmv(*UPLO,*N,*ALPHA,AP,X,*INCX,*BETA,Y,*INCY);
 }
 
 //spr2
@@ -120,7 +120,7 @@ void
 		 int			*INCY,
 		 float			*AP)
 {
-	//spr2(*UPLO,*N,*ALPHA,X,*INCX,Y,*INCY,AP);
+	spr2(*UPLO,*N,*ALPHA,X,*INCX,Y,*INCY,AP);
 }
 
 //spr
@@ -346,7 +346,7 @@ void
 		 double			*Y,
 		 int			*INCY)
 {
-	//spmv(*UPLO,*N,*ALPHA,AP,X,*INCX,*BETA,Y,*INCY);
+	spmv(*UPLO,*N,*ALPHA,AP,X,*INCX,*BETA,Y,*INCY);
 }
 
 //spr2
@@ -360,7 +360,7 @@ void
 		 int			*INCY,
 		 double			*AP)
 {
-	//spr2(*UPLO,*N,*ALPHA,X,*INCX,Y,*INCY,AP);
+	spr2(*UPLO,*N,*ALPHA,X,*INCX,Y,*INCY,AP);
 }
 
 //spr
