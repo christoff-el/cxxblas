@@ -14,7 +14,7 @@
 //#include "../level2/tbsv.tcc"			<-- NA
 //#include "../level2/tpmv.tcc"			<-- NA
 //#include "../level2/tpsv.tcc"			<-- NA
-//#include "../level2/trmv.tcc"			<-- NA
+#include "../level2/trmv.tcc"
 //#include "../level2/trsv.tcc"			<-- NA
 
 
@@ -246,7 +246,7 @@ void
 		 float			*X,
 		 int			*INCX)
 {
-	//trmv(*UPLO,*TRANS,*DIAG,*N,A,*LDA,X,*INCX);
+	trmv(*UPLO,*TRANS,*DIAG,*N,A,*LDA,X,*INCX);
 }
 
 //trsv
@@ -486,7 +486,7 @@ void
 		 double			*X,
 		 int			*INCX)
 {
-	//trmv(*UPLO,*TRANS,*DIAG,*N,A,*LDA,X,*INCX);
+	trmv(*UPLO,*TRANS,*DIAG,*N,A,*LDA,X,*INCX);
 }
 
 //trsv
