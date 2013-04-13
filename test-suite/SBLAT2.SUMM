@@ -45,9 +45,10 @@
 
  ******* FATAL ERROR - COMPUTED RESULT IS LESS THAN HALF ACCURATE *******
            EXPECTED RESULT   COMPUTED RESULT
-       1      0.350434          0.606893    
+       1       0.00000           0.00000    
+       2      0.127373         -0.127373E+10
  ******* STRMV  FAILED ON CALL NUMBER:
-     14: STRMV ('U','T','N',  1, A,  2, X, 1)                     .
+     58: STRMV ('U','T','U',  2, A,  3, X, 1)                     .
 
  STBMV  WAS NOT TESTED
 

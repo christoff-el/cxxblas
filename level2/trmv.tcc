@@ -10,7 +10,7 @@ trmv(char uplo, char trans, char diag, IndexType n,
 	
 	IndexType firstInxX = (copysign(1,incX) < 0) ? (n-1)*(-incX) : 0;
 	
-	if (diag == 'U' || diag == 'u') {								//### Unit triangular ###
+	if (diag == 'U' || diag == 'u') {								//### Unit triangular ###		//these are wrong!
 	
 		if (uplo == 'U' || uplo == 'u') {								//### Upper triangular ###
 	
@@ -20,15 +20,25 @@ trmv(char uplo, char trans, char diag, IndexType n,
 
 					for (IndexType j=0, jX=firstInxX; j<i; ++j, ++iA, jX+=incX) {
 						
-						x[jX] += x[iX];
+						x[jX] += a[iA]*x[iX];
 						
-					}	
+					}
 			
 				}
+				
 			}
 			else if (trans == 'T' || trans == 't') {						//### Transpose A ###
 	
-				
+				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(lda-i+2)) {
+
+
+					for (IndexType j=1, jX=firstInxX+incX; j<i+1; ++j, ++iA, jX+=incX) {
+						
+						x[iX] += a[iA]*x[jX];
+						
+					}
+			
+				}
 	
 			}
 			else if (trans == 'C' || trans == 'c') {						//### Conjugate transpose of A ###
@@ -40,7 +50,20 @@ trmv(char uplo, char trans, char diag, IndexType n,
 		}
 		else if (uplo == 'L' || uplo == 'l') {							//### Lower triangular ###
 		
-		
+			if (trans == 'N' || trans == 'n') {								//### No transpose ###
+	
+			
+				
+			}
+			else if (trans == 'T' || trans == 't') {						//### Transpose A ###
+	
+	
+			}
+			else if (trans == 'C' || trans == 'c') {						//### Conjugate transpose of A ###
+	
+				
+	
+			}
 		
 		}
 	
@@ -62,18 +85,102 @@ trmv(char uplo, char trans, char diag, IndexType n,
 					x[iX] *= a[iA];
 			
 				}
+				
 			}
 			else if (trans == 'T' || trans == 't') {						//### Transpose A ###
 	
-				
+				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(lda-i+1)) {
+
+					x[iX] *= a[iA];
+					++iA;
+
+					for (IndexType j=1, jX=firstInxX+incX; j<i+1; ++j, ++iA, jX+=incX) {
+						
+						x[iX] += a[iA]*x[jX];
+						
+					}
+			
+				}
 	
 			}
 			else if (trans == 'C' || trans == 'c') {						//### Conjugate transpose of A ###
 	
-				
+				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(lda-i+1)) {
+
+					x[iX] *= a[iA];
+					++iA;
+
+					for (IndexType j=1, jX=firstInxX+incX; j<i+1; ++j, ++iA, jX+=incX) {
+						
+						x[iX] += a[iA]*x[jX];				//!! no conjugate operation (so only works for real numbers)
+						
+					}
+			
+				}
 	
 			}
 
+		}
+		else if (uplo == 'L' || uplo == 'l') {							//### Lower triangular ###
+		
+			if (trans == 'N' || trans == 'n') {								//### No transpose ###
+	
+				X xTmp;
+				IndexType InxRemA = lda-n+1;
+				
+				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(InxRemA+i)) {
+				
+					xTmp = a[iA]*x[iX];				//Use temporary variable to allow sequential reading of A.
+					++iA;
+					
+					for (IndexType j=i+1, jX=firstInxX+(i+1)*incX; j<n; ++j, ++iA, jX+=incX) {
+					
+						x[jX] += a[iA]*x[iX];
+					
+					}
+					
+					x[iX] = xTmp;
+				
+				}
+				
+			}
+			else if (trans == 'T' || trans == 't') {						//### Transpose A ###
+	
+				IndexType InxRemA = lda-n+1;
+				
+				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(InxRemA+i)) {
+				
+					x[iX] *= a[iA];
+					++iA;
+					
+					for (IndexType j=i+1, jX=firstInxX+(i+1)*incX; j<n; ++j, ++iA, jX+=incX) {
+					
+						x[iX] += a[iA]*x[jX];
+					
+					}
+					
+				}
+	
+			}
+			else if (trans == 'C' || trans == 'c') {						//### Conjugate transpose of A ###
+	
+				IndexType InxRemA = lda-n+1;
+				
+				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(InxRemA+i)) {
+				
+					x[iX] *= a[iA];
+					++iA;
+					
+					for (IndexType j=i+1, jX=firstInxX+(i+1)*incX; j<n; ++j, ++iA, jX+=incX) {
+					
+						x[iX] += a[iA]*x[jX];				//!! no conjugate operation (so only works for real numbers)
+					
+					}
+					
+				}
+	
+			}
+		
 		}
 	
 	}
