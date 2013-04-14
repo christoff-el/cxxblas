@@ -29,10 +29,9 @@ trmv(char uplo, char trans, char diag, IndexType n,
 			}
 			else if (trans == 'T' || trans == 't') {						//### Transpose A ###
 	
-				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(lda-i+2)) {
+				for (IndexType i=n, iX=firstInxX+((n-1)*incX); i>0; --i, iX-=incX) {
 
-
-					for (IndexType j=1, jX=firstInxX+incX; j<i+1; ++j, ++iA, jX+=incX) {
+					for (IndexType j=0, jX=firstInxX, iA=(i-1)*lda; j<i-1; ++j, ++iA, jX+=incX) {
 						
 						x[iX] += a[iA]*x[jX];
 						
@@ -43,7 +42,15 @@ trmv(char uplo, char trans, char diag, IndexType n,
 			}
 			else if (trans == 'C' || trans == 'c') {						//### Conjugate transpose of A ###
 	
-				
+				for (IndexType i=n, iX=firstInxX+((n-1)*incX); i>0; --i, iX-=incX) {
+
+					for (IndexType j=0, jX=firstInxX, iA=(i-1)*lda; j<i-1; ++j, ++iA, jX+=incX) {
+						
+						x[iX] += a[iA]*x[jX];
+						
+					}
+			
+				}
 	
 			}
 
@@ -89,32 +96,42 @@ trmv(char uplo, char trans, char diag, IndexType n,
 			}
 			else if (trans == 'T' || trans == 't') {						//### Transpose A ###
 	
-				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(lda-i+1)) {
+				X xTmp;
+				
+				for (IndexType i=n, iX=firstInxX+((n-1)*incX), iA=(i-1)*lda-1; i>0; --i, iX-=incX) {
 
-					x[iX] *= a[iA];
-					++iA;
-
-					for (IndexType j=1, jX=firstInxX+incX; j<i+1; ++j, ++iA, jX+=incX) {
+					xTmp = x[iX];
+					x[iX] = 0;
+					
+					for (IndexType j=0, jX=firstInxX; j<i-1; ++j, ++iA, jX+=incX) {
 						
 						x[iX] += a[iA]*x[jX];
 						
 					}
+					
+					++iA;
+					
+					x[iX] += a[iA]*xTmp;
 			
 				}
 	
 			}
 			else if (trans == 'C' || trans == 'c') {						//### Conjugate transpose of A ###
 	
-				for (IndexType i=0, iX=firstInxX, iA=0; i<n; ++i, iX+=incX, iA+=(lda-i+1)) {
+				X xTmp;
+				
+				for (IndexType i=n, iX=firstInxX+((n-1)*incX), iA=(i-1)*lda; i>0; --i, iX-=incX) {
 
-					x[iX] *= a[iA];
-					++iA;
-
-					for (IndexType j=1, jX=firstInxX+incX; j<i+1; ++j, ++iA, jX+=incX) {
+					xTmp = x[iX];
+					x[iX] = 0;
+					
+					for (IndexType j=0, jX=firstInxX; j<i-1; ++j, ++iA, jX+=incX) {
 						
 						x[iX] += a[iA]*x[jX];				//!! no conjugate operation (so only works for real numbers)
 						
 					}
+					
+					x[iX] += a[iA]*xTmp;
 			
 				}
 	
