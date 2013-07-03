@@ -98,7 +98,7 @@ trmv(char uplo, char trans, char diag, IndexType n,
 	
 				X xTmp;
 				
-				for (IndexType i=n, iX=firstInxX+((n-1)*incX), iA=(i-1)*lda-1; i>0; --i, iX-=incX) {
+				for (IndexType i=n, iX=firstInxX+((n-1)*incX), iA=(i-1)*lda; i>0; --i, iX-=incX) {
 
 					xTmp = x[iX];
 					x[iX] = 0;
@@ -109,7 +109,7 @@ trmv(char uplo, char trans, char diag, IndexType n,
 						
 					}
 					
-					++iA;
+					//++iA;
 					
 					x[iX] += a[iA]*xTmp;
 			
